@@ -14,6 +14,7 @@ import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signIn, signUp } from "@/lib/actions/user.actions";
+import PlaidLink from "./PlaidLink";
 
 const AuthForm = ({ type }: { type: string }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -32,6 +33,7 @@ const AuthForm = ({ type }: { type: string }) => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
+
     try {
       //sign up with appwrite and create a plaid link token
 
@@ -93,7 +95,10 @@ const AuthForm = ({ type }: { type: string }) => {
         </div>
       </header>
       {user ? (
-        <div className="flex flex-col gap-4"> {/* PlaidLink*/}</div>
+        <div className="flex flex-col gap-4">
+          {" "}
+          <PlaidLink user={user} variant="primary" />{" "}
+        </div>
       ) : (
         <>
           <Form {...form}>
